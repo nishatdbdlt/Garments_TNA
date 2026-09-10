@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_garment_tna_template_list" model="ir.ui.view">
+        <field name="name">garment.tna.template.list</field>
+        <field name="model">garment.tna.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_garment_tna_template_form" model="ir.ui.view">
+        <field name="name">garment.tna.template.form</field>
+        <field name="model">garment.tna.template</field>
+        <field name="arch" type="xml">
+            <form string="TNA Template">
+                <header>
+                    <button name="action_load_standard_sample_types" type="object"
+                            string="Load Standard Sample Types"/>
+                    <button name="action_load_standard_milestones" type="object"
+                            string="Load Standard Milestones"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                        <field name="note" placeholder="Template notes..."/>
+                    </group>
+                    <notebook>
+                        <page string="Sample Types">
+                            <field name="sample_type_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="sample_type"/>
+                                    <field name="required"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Milestones">
+                            <field name="milestone_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="stage"/>
+                                    <field name="name"/>
+                                    <field name="activity"/>
+                                    <field name="action_type"/>
+                                    <field name="action"/>
+                                    <field name="planned_days"/>
+                                    <field name="responsible_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_garment_tna_list" model="ir.ui.view">
+        <field name="name">garment.tna.list</field>
+        <field name="model">garment.tna</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="buyer_id"/>
+                <field name="style_no"/>
+                <field name="quantity"/>
+                <field name="delivery_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_garment_tna_form" model="ir.ui.view">
+        <field name="name">garment.tna.form</field>
+        <field name="model">garment.tna</field>
+        <field name="arch" type="xml">
+            <form string="Garments TNA">
+                <sheet>
+                    <div class="oe_title"><h1><field name="name" placeholder="TNA Name"/></h1></div>
+                    <group>
+                        <group string="Order Details">
+                            <field name="template_id" options="{'no_create_edit': False}"/>
+                            <field name="buyer_id"/>
+                            <field name="style_no"/>
+                            <field name="quantity"/>
+                        </group>
+                        <group string="Key Dates">
+                            <field name="buyer_actual_date"/>
+                            <field name="buyer_planned_date"/>
+                            <field name="material_inhouse_date"/>
+                            <field name="delivery_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sample Types">
+                            <field name="sample_type_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="sample_type" readonly="1"/>
+                                    <field name="selected"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Milestones &amp; Actions">
+                            <field name="milestone_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="stage"/>
+                                    <field name="name"/>
+                                    <field name="activity"/>
+                                    <field name="action_type"/>
+                                    <field name="action"/>
+                                    <field name="planned_days"/>
+                                    <field name="start_date"/>
+                                    <field name="planned_date"/>
+                                    <field name="actual_date"/>
+                                    <field name="responsible_id"/>
+                                    <field name="deadline_status" string="Schedule Status" widget="badge" readonly="1"
+                                           decoration-danger="deadline_status == 'overdue'"
+                                           decoration-success="deadline_status == 'completed'"
+                                           decoration-warning="deadline_status == 'blocked'"/>
+                                    <field name="late_by" readonly="1"/>
+                                    <field name="status" string="Progress"
+                                           decoration-muted="status == 'pending'"
+                                           decoration-warning="status == 'in_progress'"
+                                           decoration-success="status == 'done'"
+                                           decoration-danger="status == 'blocked'"/>
+                                    <field name="remarks" optional="hide"/>
+                                    <field name="buyer_comment" optional="hide"/>
+                                    <field name="attachment_ids" widget="many2many_binary" optional="hide"/>
+                                    <field name="activity_created" readonly="1"/>
+                                </list>
+                                <form string="Milestone">
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="stage"/>
+                                                <field name="activity"/>
+                                                <field name="action_type"/>
+                                                <field name="action"/>
+                                                <field name="responsible_id"/>
+                                                <field name="status"/>
+                                            </group>
+                                            <group>
+                                                <field name="start_date"/>
+                                                <field name="planned_date"/>
+                                                <field name="actual_date"/>
+                                                <field name="deadline_status" widget="badge" readonly="1"/>
+                                                <field name="late_by" readonly="1"/>
+                                                <field name="attachment_ids" widget="many2many_binary"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <field name="remarks" placeholder="Internal remarks..."/>
+                                            <field name="buyer_comment" placeholder="Buyer comments..."/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Notes"><field name="note" placeholder="Additional instructions or comments..."/></page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_garment_tna" model="ir.actions.act_window">
+        <field name="name">TNA Plans</field>
+        <field name="res_model">garment.tna</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_garment_tna_template" model="ir.actions.act_window">
+        <field name="name">TNA Templates</field>
+        <field name="res_model">garment.tna.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_garment_tna_root" name="Garments TNA" sequence="9"/>
+    <menuitem id="menu_garment_tna" name="TNA Plans" parent="menu_garment_tna_root"
+              action="action_garment_tna" sequence="10"/>
+    <menuitem id="menu_garment_tna_template" name="TNA Templates" parent="menu_garment_tna_root"
+              action="action_garment_tna_template" sequence="20"/>
+</odoo>

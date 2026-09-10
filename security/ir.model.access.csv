@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dynamic_template_user,dynamic.template.user,model_dynamic_template,base.group_user,1,1,1,1
+access_dynamic_template_field_user,dynamic.template.field.user,model_dynamic_template_field,base.group_user,1,1,1,1
+access_garment_tna_template_user,garment.tna.template.user,model_garment_tna_template,base.group_user,1,1,1,1
+access_garment_tna_template_milestone_user,garment.tna.template.milestone.user,model_garment_tna_template_milestone,base.group_user,1,1,1,1
+access_garment_tna_template_sample_type_user,garment.tna.template.sample.type.user,model_garment_tna_template_sample_type,base.group_user,1,1,1,1
+access_garment_tna_user,garment.tna.user,model_garment_tna,base.group_user,1,1,1,1
+access_garment_tna_milestone_user,garment.tna.milestone.user,model_garment_tna_milestone,base.group_user,1,1,1,1
+access_garment_tna_sample_type_user,garment.tna.sample.type.user,model_garment_tna_sample_type,base.group_user,1,1,1,1
